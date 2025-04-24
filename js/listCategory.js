@@ -1,30 +1,17 @@
-export class Calculator extends HTMLElement{
+export class ListCategory extends HTMLElement{
     constructor(){
         super();
-        this.addEventListener('DOMContentLoaded',()=>{
-            alert(this.getAttribute("color"))
-            const n1=parseFloat(this.querySelector("#num1").value);
-            const n2=parseFloat(this.querySelector("#num2").value);
-            const op=this.querySelector("#op").value;
-            var res;
-            if (isNaN(n1) || isNaN(n2)){
-                alert("you have to enter two numbers!!!")
-            }else{
-                if (op=="add"){
-                    res=n1+n2;
-                    alert(`${n1}+${n2}=${res}`)
-                }else if (op=="min"){
-                    res=n1-n2;
-                    alert(`${n1}-${n2}=${res}`)
-                }else if (op=="mult"){
-                    res=n1*n2;
-                    
-                    alert(`${n1}*${n2}=${res}`)
-                }else {
-                    res=n1/n2;
-                    alert(`${n1}/${n2}=${res}`)
-                }  
-            }   
-        })
-    }}
-customElements.define('my-calculator', Calculator);
+    }
+    async connectedCallback(){
+        this.innerHTML=`<select name="category">
+        </select>`
+        let url="https://opentdb.com/api_category.php"
+        let r=await (fetch(url))
+        let data=await(r.json())
+        for (let i of data.trivia_categories){
+            let code=`<option value=${i.id}>${i.name}</option>`
+            this.querySelector("select").innerHTML+=code
+        }
+    }
+}
+customElements.define('list-category', ListCategory);
