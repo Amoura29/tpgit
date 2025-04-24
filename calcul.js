@@ -1,7 +1,16 @@
 export class Calculator extends HTMLElement{
     constructor(){
         super();
-        this.addEventListener('DOMContentLoaded',()=>{
+        this.innerHTML = `<input type="number" id="num1" placeholder="Enter first number"/>
+        <select id="op">
+        <option value="add">+</option>
+        <option value="min">-</option>
+        <option value="mult">*</option>
+        <option value="div">/</option>
+        </select>
+        <input type="number" id="num2" placeholder="Enter second number"/>
+        <button id="calc">Calculate</button>`
+        this.querySelector('#calc').addEventListener('click',()=>{
             alert(this.getAttribute("color"))
             const n1=parseFloat(this.querySelector("#num1").value);
             const n2=parseFloat(this.querySelector("#num2").value);
