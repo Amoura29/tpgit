@@ -1,4 +1,4 @@
-import {list-category} from ""
+import { ListCategory } from "./listCategory.js";
 var b=document.querySelector("button")
 var listQTF=document.querySelector("listQTF")
  async function generateQt(){
@@ -12,3 +12,4 @@ var listQTF=document.querySelector("listQTF")
     }
  }
  b.addEventListener("click",generateQt)
+
